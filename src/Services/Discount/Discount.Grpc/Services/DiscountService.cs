@@ -14,14 +14,14 @@ namespace Discount.Grpc.Services
     public class DiscountService : DiscountProtoService.DiscountProtoServiceBase
     {
         private readonly IDiscountRepo _repo;
-        private readonly ILogger _logger;
+        private readonly ILogger<DiscountService> _logger;
         private readonly IMapper _mapper;
 
-        public DiscountService(IDiscountRepo repo, ILogger logger, IMapper mapper)
+        public DiscountService(IDiscountRepo repo, ILogger<DiscountService> logger, IMapper mapper)
         {
-            _repo = repo;
-            _logger = logger;
-            _mapper = mapper;
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public override async Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
@@ -29,7 +29,7 @@ namespace Discount.Grpc.Services
             var coupon = await _repo.GetDiscount(request.ProductName);
             if (coupon == null)
             {
-                throw new RpcException(new Status(StatusCode.NotFound, $"Discount with ProductName = {request.ProductName} is not found"));
+                throw new RpcException(new Status(StatusCode.NotFound, $"Discount with ProductName={request.ProductName} is not found"));
             }
 
             _logger.LogInformation("Discount retrived for ProductName:{productName}, Amount:{amount}", coupon.ProductName, coupon.Amount);

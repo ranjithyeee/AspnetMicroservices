@@ -8,17 +8,17 @@ namespace Basket.API.GrpcServices
 {
     public class DiscountGrpcService
     {
-        private readonly DiscountProtoService.DiscountProtoServiceClient _discountProtoServiceClient;
+        private readonly DiscountProtoService.DiscountProtoServiceClient _discountProtoService;
 
-        public DiscountGrpcService(DiscountProtoService.DiscountProtoServiceClient discountProtoServiceClient)
+        public DiscountGrpcService(DiscountProtoService.DiscountProtoServiceClient discountProtoService)
         {
-            _discountProtoServiceClient = discountProtoServiceClient;
+            _discountProtoService = discountProtoService ?? throw new ArgumentNullException(nameof(discountProtoService));
         }
 
         public async Task<CouponModel> GetDicount(string productName)
         {
             var discountRequest = new GetDiscountRequest { ProductName = productName };
-            return await _discountProtoServiceClient.GetDiscountAsync(discountRequest);
+            return await _discountProtoService.GetDiscountAsync(discountRequest);
         }
 
 
