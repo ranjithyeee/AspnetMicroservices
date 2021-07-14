@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:55615",
+      "applicationUrl": "http://localhost:62826",
       "sslPort": 0
     }
   },
@@ -15,14 +15,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Ordering.API": {
+    "OcelotApiGw": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "Swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Local"
       },
-      "applicationUrl": "http://localhost:5004"
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:5010"
     },
     "Docker": {
       "commandName": "Docker",
