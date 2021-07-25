@@ -74,7 +74,7 @@ namespace Ordering_API
             //    app.UseExceptionHandler("/Error");
             //}
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             app.UseRouting();
 
